@@ -1,0 +1,57 @@
+<template>
+  <button
+    @click="$emit('buttonClicked')"
+    :class="`button ${color} ${size}`"
+    :type="isTypeButton ? 'button' : 'submit'"
+  >
+    {{ label }}
+  </button>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  props: {
+    label: {
+      type: String,
+      required: true,
+      default: 'No Name',
+    },
+    color: {
+      type: String,
+      default: '',
+    },
+    size: {
+      type: String,
+      default: '',
+    },
+    isTypeButton: {
+      type: Boolean,
+      default: true,
+    },
+  },
+});
+</script>
+
+<style scoped lang="scss">
+.button {
+  padding: 8px 10px;
+  border: 1px solid grey;
+  color: grey;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.large {
+  width: 146px;
+  padding: 10px 25px;
+}
+
+.secondary {
+  color: white;
+  background: blue;
+  border-color: blue;
+}
+</style>
