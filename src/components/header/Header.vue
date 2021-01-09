@@ -27,7 +27,7 @@ export default defineComponent({
   },
   methods: {
     sendSearchValue() {
-      this.$emit('newSearchValue', this.searchValue);
+      this.$emit('mainSearchValueUpdated', this.searchValue);
       this.searchValue = '';
     },
   },
@@ -64,5 +64,3 @@ export default defineComponent({
   color: white;
 }
 </style>
-
-// :modelValue="inputValue" // @input="$emit('update:modelValue', $event.target.value)"

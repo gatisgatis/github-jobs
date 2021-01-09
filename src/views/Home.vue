@@ -1,16 +1,25 @@
 <template>
   <div>
-    <Header @newSearchValue="searchJob" />
-    <Button label="MY BYTT" @buttonClicked="handleButtonClick()" />
-    <div class="RAAMIS">
-      <Image imgPath="https://wallpapercave.com/wp/wp2550677.jpg" />
-    </div>
-    <div v-if="loading" class="row">
-      LOADING.......
-    </div>
-    <div v-else class="row">
-      <div v-for="job in jobs" :key="job.id" class="col-xs-12 margin-bottom--10">
-        <Card :job="job" />
+    <Header @mainSearchValueUpdated="updateMainSearchInputValue" class="margin-bottom--30" />
+    <div class="row">
+      <div class="col-xs-4">
+        <SideSearch
+          @sideSearchValueUpdated="updateSideSearchInputValue"
+          @checkboxValueUpdated="updateChekboxValue"
+          @radioValueUpdated="updateRadioValue"
+          @sideSearchEnterPressed="filterJobs"
+        />
+      </div>
+      <div class="col-xs-8">
+        <h1>{{ sideSearchInputValue }}</h1>
+        <div v-if="loading" class="row">
+          LOADING.......
+        </div>
+        <div v-else class="row">
+          <div v-for="job in jobs" :key="job.id" class="col-xs-12 margin-bottom--10">
+            <Card :job="job" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,35 +30,61 @@
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import Card from '../components/card/Card.vue';
-import Button from '../components/button/Button.vue';
-import Image from '../components/image/Image.vue';
 import { Job } from '../types/job';
 import Header from '../components/header/Header.vue';
+import SideSearch from '../components/sideSearch/SideSearch.vue';
 
 interface Data {
+  sideSearchInputValue: string;
   jobs: Job[];
   loading: boolean;
+  checkboxValue: boolean;
+  radioValue: string;
+  mainSearchInputValue: string;
 }
 
 export default defineComponent({
   components: {
     Card,
-    Button,
-    Image,
     Header,
+    SideSearch,
   },
   data(): Data {
     return {
+      sideSearchInputValue: '',
       jobs: [],
       loading: true,
+      checkboxValue: false,
+      radioValue: '',
+      mainSearchInputValue: '',
     };
   },
   methods: {
-    handleButtonClick() {
-      console.log('Nospiedu pogu');
+    updateMainSearchInputValue(value: string) {
+      this.mainSearchInputValue = value;
+      this.filterJobs();
     },
-    searchJob(searchValue: string) {
-      console.log('saņēmām piepras', searchValue);
+    updateSideSearchInputValue(value: string) {
+      this.sideSearchInputValue = value;
+    },
+    updateChekboxValue(value: boolean) {
+      this.checkboxValue = value;
+    },
+    updateRadioValue(value: string) {
+      this.radioValue = value;
+    },
+    filterJobs() {
+      console.log(
+        this.sideSearchInputValue,
+        this.checkboxValue,
+        this.radioValue,
+        this.mainSearchInputValue,
+      );
+      // uzģenerēt jaunu API linku
+      // Uztaisit axios call
+      // nomainit loading state
+      // update job state
+      // noņemt loading state
     },
   },
   // mounted() {
