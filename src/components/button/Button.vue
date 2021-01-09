@@ -1,7 +1,7 @@
 <template>
   <button
     @click="$emit('buttonClicked')"
-    :class="`button ${color} ${size}`"
+    :class="`button1 ${color} ${size}`"
     :type="isTypeButton ? 'button' : 'submit'"
   >
     {{ label }}
@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.button {
+.button1 {
   padding: 8px 10px;
   border: 1px solid grey;
   color: grey;

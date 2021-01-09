@@ -1,11 +1,12 @@
 <template>
+  <Button label="add kautko" />
   <div class="wrapper">
     <div class="img-wrapper">
       <img class="img" :src="job.company_logo" :alt="job.company" />
     </div>
     <div>
       <h5>{{ job.company }}</h5>
-      <h2 @click="goToJobPage()">{{ job.title }}</h2>
+      <h2 class='title' @click="goToJobPage()">{{ job.title }}</h2>
       <div>
         <h4>{{ job.type }}</h4>
       </div>
@@ -21,9 +22,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Button from '../button/Button.vue';
 // import { Job } from '../../App.vue';
 
 export default defineComponent({
+  components: {
+    Button,
+  },
   props: {
     job: {
       type: Object,
@@ -60,5 +65,9 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.title {
+  cursor: pointer;
 }
 </style>

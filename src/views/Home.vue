@@ -1,8 +1,9 @@
 <template>
   <div>
+    <Header @newSearchValue="searchJob" />
     <Button label="MY BYTT" @buttonClicked="handleButtonClick()" />
     <div class="RAAMIS">
-      <Image imgPath="https://wallpapercave.com/wp/wp2550677.jpg"/>
+      <Image imgPath="https://wallpapercave.com/wp/wp2550677.jpg" />
     </div>
     <div v-if="loading" class="row">
       LOADING.......
@@ -23,6 +24,7 @@ import Card from '../components/card/Card.vue';
 import Button from '../components/button/Button.vue';
 import Image from '../components/image/Image.vue';
 import { Job } from '../types/job';
+import Header from '../components/header/Header.vue';
 
 interface Data {
   jobs: Job[];
@@ -34,6 +36,7 @@ export default defineComponent({
     Card,
     Button,
     Image,
+    Header,
   },
   data(): Data {
     return {
@@ -45,18 +48,21 @@ export default defineComponent({
     handleButtonClick() {
       console.log('Nospiedu pogu');
     },
+    searchJob(searchValue: string) {
+      console.log('saņēmām piepras', searchValue);
+    },
   },
-  mounted() {
-    const accessPoint = 'https://cors-anywhere.herokuapp.com';
-    const url = 'https://jobs.github.com/positions.json';
-    axios.get(`${accessPoint}/${url}`).then(({ data }) => {
-      console.log(data);
-      data.forEach((job: Job) => {
-        this.jobs.push({ ...job });
-      });
-      this.loading = false;
-    });
-  },
+  // mounted() {
+  //   const accessPoint = 'https://cors-anywhere.herokuapp.com';
+  //   const url = 'https://jobs.github.com/positions.json';
+  //   axios.get(`${accessPoint}/${url}`).then(({ data }) => {
+  //     console.log(data);
+  //     data.forEach((job: Job) => {
+  //       this.jobs.push({ ...job });
+  //     });
+  //     this.loading = false;
+  //   });
+  // },
 });
 </script>
 
