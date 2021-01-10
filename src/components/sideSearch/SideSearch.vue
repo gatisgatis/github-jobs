@@ -5,7 +5,9 @@
       <label for="checkbox">Full Time</label>
     </div>
     <div class="inputWrapper">
+      <label class="sideInputLabel" for="sideinput">Location</label>
       <input
+        id="sideinput"
         v-model="sideSearchValue"
         placeholder="City, state, zip code or country"
         @change="sendSideSearchValue"
@@ -14,7 +16,7 @@
     </div>
     <template v-for="(city, index) in cities" :key="index" >
       <input type="radio" :id="city" :value="city" v-model="pickedRadio" @change="sendRadioValue" />
-      <label :for="city">{{city}}</label>
+      <label class="radioLabel" :for="city">{{city}}</label>
       <br />
     </template>
   </div>
@@ -50,4 +52,5 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

@@ -20,7 +20,6 @@
 </template>
 
 <script lang="ts">
-/* eslint-disable @typescript-eslint/camelcase */
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import FullJob from '../components/full-job/FullJob.vue';

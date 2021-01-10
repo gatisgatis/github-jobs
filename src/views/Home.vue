@@ -1,14 +1,17 @@
 <template>
   <div>
     <Header @mainSearchValueUpdated="updateMainSearchInputValue" class="margin-bottom--30" />
+    <Button label="<" @click="minusPageNumber" v-if="showArrowButtons()" />
     <Button
-      v-for="num in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+      v-for="num in pagesCount"
       :key="num"
-      :label="num"
+      :label="num.toString()"
       @buttonClicked="() => changePageNumber(num)"
     />
+    <Button label=">" @click="plusPageNumber" v-if="showArrowButtons()" />
     <h1>{{ pageNumber }}</h1>
     <h2>{{ jobsCount }}</h2>
+    <h2>{{ pagesCount }}</h2>
     <div class="row">
       <div class="col-xs-12 col-sm-4">
         <SideSearch
@@ -34,14 +37,13 @@
 </template>
 
 <script lang="ts">
-/* eslint-disable @typescript-eslint/camelcase */
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import Card from '../components/card/Card.vue';
 import { Job } from '../types/job';
 import Header from '../components/header/Header.vue';
-import SideSearch from '../components/sideSearch/SideSearch.vue';
 import Button from '../components/button/Button.vue';
+import SideSearch from '../components/sideSearch/SideSearch.vue';
 
 interface Data {
   sideSearchInputValue: string;
@@ -76,6 +78,18 @@ export default defineComponent({
     };
   },
   methods: {
+    showArrowButtons() {
+      console.log(this.pagesCount > 1);
+      return this.pagesCount > 1;
+    },
+    minusPageNumber() {
+      if (this.pageNumber <= 1) return;
+      this.pageNumber -= 1;
+    },
+    plusPageNumber() {
+      if (this.pageNumber >= this.pagesCount) return;
+      this.pageNumber += 1;
+    },
     changePageNumber(newPageNumber: number) {
       this.pageNumber = newPageNumber;
     },
@@ -114,6 +128,7 @@ export default defineComponent({
           this.jobs.push({ ...job });
         });
         this.loading = false;
+        this.pageNumber = 1;
       });
     },
   },
@@ -134,6 +149,9 @@ export default defineComponent({
     },
     jobsCount(): number {
       return this.jobs.length;
+    },
+    pagesCount(): number {
+      return Math.ceil(this.jobs.length / 5);
     },
     // pageButtons(): number[] {
     // },

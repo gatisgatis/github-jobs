@@ -15,8 +15,8 @@
       </div>
       <div class="col-sm-4 col-xs-offset-4 col-sm-offset-0 col-xs-8 flex bottom-xs">
         <div>
-          <span>{{ job.location }}</span>
-          <span>{{ job.created_at }}</span>
+          <div class="location">{{ job.location }}</div>
+          <div class="when">{{ job.created_at }}</div>
         </div>
       </div>
     </div>
@@ -50,6 +50,7 @@ export default defineComponent({
 .wrapper {
   border: 2px solid red;
   width: 100%;
+  background-color: white;
 }
 
 .img-wrapper-card {
@@ -61,5 +62,9 @@ export default defineComponent({
 
 .title {
   cursor: pointer;
+}
+
+.location, .when {
+  color: #B9BDCF;
 }
 </style>

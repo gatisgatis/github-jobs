@@ -1,6 +1,7 @@
 <template>
   <div class="img-wrapper" :style="{ paddingTop: paddingTopFromProps }">
-    <img class="img" :src="imgPath" :alt="alt" :class="!isObjectFitCover && 'contain'" />
+    <div class="NoImage" v-if="imgPath === null">Not found</div>
+    <img class="img" :src="imgPath" :alt="alt" :class="!isObjectFitCover && 'contain'" v-else />
   </div>
 </template>
 
@@ -52,5 +53,16 @@ export default defineComponent({
 
 .contain {
   object-fit: contain;
+}
+
+.NoImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background-color: #F2F2F2;
+  color: #BDBDBD;
 }
 </style>
