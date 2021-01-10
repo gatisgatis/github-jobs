@@ -1,7 +1,7 @@
 <template>
-  <div class="hwotodasdas">
-    <router-link :to="'/'">Back To Search</router-link>
-    <h2>HOW TO APPLY</h2>
+  <div class="wrapper">
+    <router-link class="link-to-home" :to="'/'">Back To Search</router-link>
+    <div class="title">HOW TO APPLY</div>
     <p v-html="howToApply" />
   </div>
 </template>
@@ -21,7 +21,19 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.hwotodasdas {
-  background-color: orange;
+.wrapper {
+  padding: 10px;
+}
+
+.link-to-home {
+  color: blue;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.title {
+  color: grey;
+  margin-bottom: 20px;
 }
 </style>

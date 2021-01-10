@@ -46,12 +46,12 @@ export default defineComponent({
 
 .large {
   width: 146px;
-  padding: 10px 25px;
+  padding: 15px 25px;
 }
 
 .secondary {
   color: white;
-  background: blue;
+  background-color: blue;
   border-color: blue;
 }
 </style>

@@ -1,14 +1,14 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" @click="goToJobPage()">
     <div class="row">
       <div class="col-xs-4 col-sm-2 flex middle-xs">
         <div class="img-wrapper-card">
-          <Image :imgPath="job.company_logo" :alt="job.company" :isObjectFitCover="false"/>
+          <Image :imgPath="job.company_logo" :alt="job.company" :isObjectFitCover="false" />
         </div>
       </div>
       <div class="col-xs-8 col-sm-6">
         <h5>{{ job.company }}</h5>
-        <h2 class="title" @click="goToJobPage()">{{ job.title }}</h2>
+        <h2 class="title">{{ job.title }}</h2>
         <div>
           <h4>{{ job.type }}</h4>
         </div>
@@ -48,9 +48,14 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .wrapper {
-  border: 2px solid red;
   width: 100%;
   background-color: white;
+  border-radius: 5px;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 3px 3px 10px grey;
+  }
 }
 
 .img-wrapper-card {
@@ -64,7 +69,8 @@ export default defineComponent({
   cursor: pointer;
 }
 
-.location, .when {
-  color: #B9BDCF;
+.location,
+.when {
+  color: #b9bdcf;
 }
 </style>

@@ -1,26 +1,30 @@
 <template>
   <div class="wrapper">
     <div class="row">
-      <div class="col-xs">
+      <div class="col-xs-12 flex start-xs">
         <h3>{{ job.title }}</h3>
-      </div>
-      <div class="col-xs flex middle-xs start-xs">
         <h4>{{ job.type }}</h4>
       </div>
+      <div class="col-xs-12">
+        <div class="when">{{ job.created_at }}</div>
+      </div>
     </div>
-    <div class="when">{{ job.created_at }}</div>
-    <div class="row">
-      <div class="col-xs-1">
+    <div class="row middle-xs">
+      <div class="col-xs-2 col-sm-1">
         <div class="img-wrapper-fullJob">
-          <Image :imgPath="job.company_logo" :alt="job.company" :isObjectFitCover="false"/>
+          <Image :imgPath="job.company_logo" :alt="job.company" :isObjectFitCover="false" />
         </div>
       </div>
-      <div class="col-xs-1">
+      <div class="col-xs-10 col-sm-11 top-xs flex dir-col">
         <h3>{{ job.company }}</h3>
         <div class="location">{{ job.location }}</div>
       </div>
     </div>
-    <p v-html="job.description" />
+    <div class="row">
+      <div class="col-xs-12">
+        <p v-html="job.description" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -48,7 +52,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .wrapper {
-  border: 2px solid red;
+  padding: 20px;
   width: 100%;
 }
 
@@ -56,7 +60,8 @@ export default defineComponent({
   width: 100%;
 }
 
-.location, .when {
-  color: #B9BDCF;
+.location,
+.when {
+  color: #b9bdcf;
 }
 </style>

@@ -1,18 +1,9 @@
 <template>
-  <div>
-    <Header @mainSearchValueUpdated="updateMainSearchInputValue" class="margin-bottom--30" />
-    <Button label="<" @click="minusPageNumber" v-if="showArrowButtons()" />
-    <Button
-      v-for="num in pagesCount"
-      :key="num"
-      :label="num.toString()"
-      @buttonClicked="() => changePageNumber(num)"
-    />
-    <Button label=">" @click="plusPageNumber" v-if="showArrowButtons()" />
-    <h1>{{ pageNumber }}</h1>
-    <h2>{{ jobsCount }}</h2>
-    <h2>{{ pagesCount }}</h2>
+  <div class="container">
     <div class="row">
+      <div class="col-xs-12">
+        <Header @mainSearchValueUpdated="updateMainSearchInputValue" class="margin-bottom--30" />
+      </div>
       <div class="col-xs-12 col-sm-4">
         <SideSearch
           @sideSearchValueUpdated="updateSideSearchInputValue"
@@ -30,6 +21,15 @@
           <div v-else v-for="job in jobsToShow" :key="job.id" class="col-xs-12 margin-bottom--10">
             <Card :job="job" />
           </div>
+        </div>
+        <div class="col-xs-12 flex end-xs">
+          <Button
+            v-for="(btn, index) in pageButtons"
+            :key="index"
+            :label="btn"
+            :color="Number(btn) === pageNumber ? 'secondary' : 'primary'"
+            @buttonClicked="() => changePageNumber(btn)"
+          />
         </div>
       </div>
     </div>
@@ -78,20 +78,14 @@ export default defineComponent({
     };
   },
   methods: {
-    showArrowButtons() {
-      console.log(this.pagesCount > 1);
-      return this.pagesCount > 1;
-    },
-    minusPageNumber() {
-      if (this.pageNumber <= 1) return;
-      this.pageNumber -= 1;
-    },
-    plusPageNumber() {
-      if (this.pageNumber >= this.pagesCount) return;
-      this.pageNumber += 1;
-    },
-    changePageNumber(newPageNumber: number) {
-      this.pageNumber = newPageNumber;
+    changePageNumber(btn: string) {
+      if (btn === '<') {
+        if (!(this.pageNumber < 2)) this.pageNumber -= 1;
+      } else if (btn === '>') {
+        if (!(this.pageNumber >= this.pagesCount)) this.pageNumber += 1;
+      } else if (btn !== '...') {
+        this.pageNumber = Number(btn);
+      }
     },
     updateMainSearchInputValue(value: string) {
       this.mainSearchInputValue = value;
@@ -153,8 +147,23 @@ export default defineComponent({
     pagesCount(): number {
       return Math.ceil(this.jobs.length / 5);
     },
-    // pageButtons(): number[] {
-    // },
+    pageButtons(): string[] {
+      // pagesCount 10
+      // pages number 1
+      const output: string[] = [];
+      if (this.pagesCount > 1) output.push('<'); // nav
+      output.push('1'); // ir
+      if (this.pagesCount > 4 && this.pageNumber > 3) output.push('...'); // nav
+      if (this.pageNumber > 2) output.push(String(this.pageNumber - 1)); // nav
+      if (this.pagesCount > 1 && this.pageNumber !== 1 && this.pageNumber !== this.pagesCount) {
+        output.push(String(this.pageNumber));
+      }
+      if (this.pageNumber + 1 < this.pagesCount) output.push(String(this.pageNumber + 1));
+      if (this.pagesCount > 4 && this.pageNumber < 8) output.push('...');
+      if (this.pagesCount > 1) output.push(String(this.pagesCount));
+      if (this.pagesCount > 1) output.push('>');
+      return output;
+    },
   },
 });
 </script>

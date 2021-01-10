@@ -7,7 +7,8 @@
         placeholder="Title, companies, expertise or benefits"
         v-model="searchValue"
       />
-      <Button label="Search" class="button" @buttonClicked="sendSearchValue" />
+      <i class="material-icons search-icon">work_outline</i>
+      <Button label="Search" class="button" @buttonClicked="sendSearchValue" size="large" />
     </div>
   </div>
 </template>
@@ -34,11 +35,14 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .header {
   background-image: url('../../assets/images/backgroundImg.png');
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
   width: 100%;
-  height: 100px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,13 +50,33 @@ export default defineComponent({
 
 .inputWrapper {
   position: relative;
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 75%;
+  height: 55px;
 }
 
 .input {
   display: block;
-  max-width: 800px;
   width: 100%;
-  min-height: 50px;
+  height: 100%;
+  margin-left: 40px;
+  border: none;
+  &::placeholder {
+    color: #b9bdcf;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  color: #b9bdcf;
+  transform: translate(0, -50%);
 }
 
 .button {

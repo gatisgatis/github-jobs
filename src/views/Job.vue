@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>This is an job page</h1>
     <div class="container">
       <template v-if="loading">
         LOADING...
