@@ -6,7 +6,10 @@
         <h4>{{ job.type }}</h4>
       </div>
       <div class="col-xs-12">
-        <div class="when">{{ job.created_at }}</div>
+        <div class="flex middle-xs whenWrapper">
+          <i class="material-icons public">access_time</i>
+          <span class="when">{{ job.created_at }}</span>
+        </div>
       </div>
     </div>
     <div class="row middle-xs">
@@ -17,7 +20,10 @@
       </div>
       <div class="col-xs-10 col-sm-11 top-xs flex dir-col">
         <h3>{{ job.company }}</h3>
-        <div class="location">{{ job.location }}</div>
+        <div class="flex middle-xs locationWrapper">
+          <i class="material-icons public">public</i>
+          <span class="location">{{ job.location }}</span>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -51,6 +57,10 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+* {
+  color: #334680;
+}
+
 .wrapper {
   padding: 20px;
   width: 100%;
@@ -63,5 +73,16 @@ export default defineComponent({
 .location,
 .when {
   color: #b9bdcf;
+  display: flex;
+}
+
+.public {
+  display: flex;
+  color: #b9bdcf;
+}
+
+.locationWrapper, .whenWrapper {
+  min-width: 80px;
+  justify-content: space-between;
 }
 </style>

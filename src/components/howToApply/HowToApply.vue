@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <router-link class="link-to-home" :to="'/'">Back To Search</router-link>
-    <div class="title">HOW TO APPLY</div>
+    <div class="title">TO APPLY</div>
     <p v-html="howToApply" />
   </div>
 </template>
@@ -21,6 +21,9 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+*{
+  color:#334680;
+}
 .wrapper {
   padding: 10px;
 }
@@ -33,7 +36,8 @@ export default defineComponent({
 }
 
 .title {
-  color: grey;
-  margin-bottom: 20px;
+  color: #B9BDCF;
+  margin: 20px 0;
+  font-weight: 900;
 }
 </style>

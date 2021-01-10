@@ -10,12 +10,14 @@
         <h5>{{ job.company }}</h5>
         <h2 class="title">{{ job.title }}</h2>
         <div>
-          <h4>{{ job.type }}</h4>
+          <h4 class="jobType">{{ job.type }}</h4>
         </div>
       </div>
       <div class="col-sm-4 col-xs-offset-4 col-sm-offset-0 col-xs-8 flex bottom-xs">
         <div>
+          <i class="material-icons">public</i>
           <div class="location">{{ job.location }}</div>
+          <i class="material-icons">access_time</i>
           <div class="when">{{ job.created_at }}</div>
         </div>
       </div>
@@ -47,12 +49,16 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+* {
+  color: #334680;
+}
 .wrapper {
   width: 100%;
   background-color: white;
   border-radius: 5px;
   transition: box-shadow 0.2s;
   cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   &:hover {
     box-shadow: 3px 3px 10px grey;
   }
@@ -70,7 +76,13 @@ export default defineComponent({
 }
 
 .location,
-.when {
+.when,
+.material-icons {
   color: #b9bdcf;
+}
+
+.jobType {
+  border: 1px solid #334680;
+  border-radius: 4px;
 }
 </style>
