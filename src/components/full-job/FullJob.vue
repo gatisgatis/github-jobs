@@ -2,6 +2,7 @@
   <div class="wrapper">
     <h1>{{ job.title }}</h1>
     <p v-html="job.description" />
+    <h3>{{ job.how_to_apply }}</h3>
   </div>
 </template>
 
@@ -26,23 +27,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .wrapper {
   border: 2px solid red;
-  width: 500px;
-  height: 200px;
-  display: flex;
-}
-
-.img-wrapper {
-  position: relative;
-  width: 150px;
-  height: 150px;
-}
-
-.img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 </style>

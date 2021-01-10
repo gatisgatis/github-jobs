@@ -44,6 +44,7 @@ export default defineComponent({
     },
     sideSearchEnterPress() {
       this.$emit('sideSearchEnterPressed');
+      this.sideSearchValue = '';
     },
   },
 });
