@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="container">
-      <template v-if="loading">
-        LOADING...
+      <template v-if="loading" class='flex center-xs'>
+        <Loader />
       </template>
       <template v-else>
         <div class="row">
@@ -23,6 +23,7 @@ import { defineComponent } from 'vue';
 import axios from 'axios';
 import FullJob from '../components/full-job/FullJob.vue';
 import HowToApply from '../components/howToApply/HowToApply.vue';
+import Loader from '../components/loader/loader.vue';
 import { Job } from '../types/job';
 
 interface Data {
@@ -45,6 +46,7 @@ export default defineComponent({
   components: {
     FullJob,
     HowToApply,
+    Loader,
   },
   mounted() {
     const accessPoint = 'https://cors-anywhere.herokuapp.com';

@@ -6,6 +6,7 @@
         type="text"
         placeholder="Title, companies, expertise or benefits"
         v-model="searchValue"
+        @keyup.enter="sendSearchValue"
       />
       <i class="material-icons search-icon">work_outline</i>
       <Button label="Search" class="button" @buttonClicked="sendSearchValue" size="large" />

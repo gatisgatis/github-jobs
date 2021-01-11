@@ -1,7 +1,7 @@
 <template>
   <button
     @click="$emit('buttonClicked')"
-    :class="`button1 ${color} ${size}`"
+    :class="`button1 ${color} ${size} ${hideBorder && 'hideBorder'}`"
     :type="isTypeButton ? 'button' : 'submit'"
   >
     {{ label }}
@@ -30,6 +30,10 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    hideBorder: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 </script>
@@ -53,5 +57,16 @@ export default defineComponent({
   color: white;
   background-color: blue;
   border-color: blue;
+}
+
+.hideBorder {
+  border: none;
+}
+
+@media (max-width: 690px) {
+  .large {
+    width: 90px;
+    padding: 15px;
+  }
 }
 </style>

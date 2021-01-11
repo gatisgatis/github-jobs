@@ -81,8 +81,12 @@ export default defineComponent({
   color: #b9bdcf;
 }
 
-.locationWrapper, .whenWrapper {
+.locationWrapper {
   min-width: 80px;
   justify-content: space-between;
+}
+
+.whenWrapper {
+  border: 2px solid black;
 }
 </style>

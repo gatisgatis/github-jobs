@@ -13,8 +13,8 @@
         />
       </div>
       <div class="col-xs-12 col-sm-8">
-        <div v-if="loading" class="row">
-          LOADING.......
+        <div v-if="loading" class="row center-xs">
+          <Loader />
         </div>
         <div v-else class="row">
           <h1 v-if="!jobsCount">Found nothing</h1>
@@ -24,10 +24,12 @@
         </div>
         <div class="col-xs-12 flex end-xs">
           <Button
+            class="margin-right--5"
             v-for="(btn, index) in pageButtons"
             :key="index"
             :label="btn"
             :color="Number(btn) === pageNumber ? 'secondary' : 'primary'"
+            :hideBorder="btn === '...' && true"
             @buttonClicked="() => changePageNumber(btn)"
           />
         </div>
@@ -44,6 +46,7 @@ import { Job } from '../types/job';
 import Header from '../components/header/Header.vue';
 import Button from '../components/button/Button.vue';
 import SideSearch from '../components/sideSearch/SideSearch.vue';
+import Loader from '../components/loader/loader.vue';
 
 interface Data {
   sideSearchInputValue: string;
@@ -63,6 +66,7 @@ export default defineComponent({
     Header,
     SideSearch,
     Button,
+    Loader,
   },
   data(): Data {
     return {
@@ -127,9 +131,11 @@ export default defineComponent({
     },
   },
   mounted() {
+    const backupApi = 'https://raw.githubusercontent.com/mart-j/jobs/main/positions.json';
     const accessPoint = 'https://cors-anywhere.herokuapp.com';
     const url = `https://jobs.github.com/positions.json?page=${this.urlPageNumber}`;
-    axios.get(`${accessPoint}/${url}`).then(({ data }) => {
+    // axios.get(`${accessPoint}/${url}`).then(({ data }) => {
+    axios.get(backupApi).then(({ data }) => {
       console.log(data);
       data.forEach((job: Job) => {
         this.jobs.push({ ...job });
@@ -168,4 +174,5 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+</style>

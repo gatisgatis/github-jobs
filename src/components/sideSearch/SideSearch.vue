@@ -5,7 +5,7 @@
       <label for="checkbox">Full Time</label>
     </div>
     <div class="inputWrapper">
-      <label class="sideInputLabel" for="sideinput">Location</label>
+      <label class="sideInputLabel" for="">Location</label>
       <div class="inputWrapperInner">
         <i class="material-icons public">public</i>
         <input
