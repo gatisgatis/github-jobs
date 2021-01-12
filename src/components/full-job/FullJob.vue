@@ -3,12 +3,12 @@
     <div class="row">
       <div class="col-xs-12 flex start-xs">
         <h3>{{ job.title }}</h3>
-        <h4>{{ job.type }}</h4>
+        <h4 class="jobType">{{ job.type }}</h4>
       </div>
       <div class="col-xs-12">
         <div class="flex middle-xs whenWrapper">
           <i class="material-icons public">access_time</i>
-          <span class="when">{{ job.created_at }}</span>
+          <span class="when">{{ formatedDate }}</span>
         </div>
       </div>
     </div>
@@ -36,6 +36,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import moment from 'moment';
 import Image from '../image/Image.vue';
 
 export default defineComponent({
@@ -51,6 +52,11 @@ export default defineComponent({
   methods: {
     goToJobPage() {
       this.$router.push('/About');
+    },
+  },
+  computed: {
+    formatedDate(): string {
+      return moment(this.job.created_at).fromNow();
     },
   },
 });
@@ -74,6 +80,7 @@ export default defineComponent({
 .when {
   color: #b9bdcf;
   display: flex;
+  padding-left: 10px;
 }
 
 .public {
@@ -86,7 +93,11 @@ export default defineComponent({
   justify-content: space-between;
 }
 
-.whenWrapper {
-  border: 2px solid black;
+.jobType {
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-left: 10px;
+  padding: 5px 3px;
+  font-size: 0.8rem;
 }
 </style>
