@@ -1,24 +1,6 @@
-# github-jobs
+Challenge project from https://devchallenges.io/challenges/TtUjDt19eIHxNQ4n5jps
 
-## Project setup
-```
-npm install
-```
+First steps in Vue
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+https://gatisgatis.github.io/github-jobs
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
