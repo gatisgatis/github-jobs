@@ -22,7 +22,7 @@
             <Card :job="job" />
           </div>
         </div>
-        <div class="col-xs-12 flex end-xs">
+        <div v-if="!loading" class="col-xs-12 flex end-xs">
           <Button
             class="margin-right--5"
             v-for="(btn, index) in pageButtons"
@@ -129,19 +129,31 @@ export default defineComponent({
         this.pageNumber = 1;
       });
     },
+    getDataFromApi() {
+      const backupApi = 'https://raw.githubusercontent.com/mart-j/jobs/main/positions.json';
+      const accessPoint = 'https://cors-anywhere.herokuapp.com';
+      const url = `https://jobs.github.com/positions.json?page=${this.urlPageNumber}`;
+      axios.get(`${accessPoint}/${url}`).then(({ data }) => {
+        // axios.get(backupApi).then(({ data }) => {
+        data.forEach((job: Job) => {
+          this.jobs.push({ ...job });
+        });
+        this.loading = false;
+      });
+    },
+  },
+  watch: {
+    pageNumber(actualPageNumber: number) {
+      if (actualPageNumber % 10 === 0) {
+        this.urlPageNumber = this.pageNumber / 10 + 1; // 2
+        if (this.jobsCount < this.urlPageNumber * 50) {
+          this.getDataFromApi();
+        }
+      }
+    },
   },
   mounted() {
-    const backupApi = 'https://raw.githubusercontent.com/mart-j/jobs/main/positions.json';
-    const accessPoint = 'https://cors-anywhere.herokuapp.com';
-    const url = `https://jobs.github.com/positions.json?page=${this.urlPageNumber}`;
-    // axios.get(`${accessPoint}/${url}`).then(({ data }) => {
-    axios.get(backupApi).then(({ data }) => {
-      console.log(data);
-      data.forEach((job: Job) => {
-        this.jobs.push({ ...job });
-      });
-      this.loading = false;
-    });
+    this.getDataFromApi();
   },
   computed: {
     jobsToShow(): Job[] {
@@ -151,7 +163,7 @@ export default defineComponent({
       return this.jobs.length;
     },
     pagesCount(): number {
-      return Math.ceil(this.jobs.length / 5);
+      return Math.ceil(this.jobsCount / 5);
     },
     pageButtons(): string[] {
       // pagesCount 10
@@ -159,13 +171,13 @@ export default defineComponent({
       const output: string[] = [];
       if (this.pagesCount > 1) output.push('<'); // nav
       output.push('1'); // ir
-      if (this.pagesCount > 4 && this.pageNumber > 3) output.push('...'); // nav
+      if (this.pagesCount > 3 && this.pageNumber > 3) output.push('...'); // nav
       if (this.pageNumber > 2) output.push(String(this.pageNumber - 1)); // nav
       if (this.pagesCount > 1 && this.pageNumber !== 1 && this.pageNumber !== this.pagesCount) {
         output.push(String(this.pageNumber));
       }
       if (this.pageNumber + 1 < this.pagesCount) output.push(String(this.pageNumber + 1));
-      if (this.pagesCount > 4 && this.pageNumber < 8) output.push('...');
+      if (this.pagesCount > 3 && this.pageNumber < this.pagesCount - 2) output.push('...');
       if (this.pagesCount > 1) output.push(String(this.pagesCount));
       if (this.pagesCount > 1) output.push('>');
       return output;
@@ -174,5 +186,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
